@@ -34,9 +34,22 @@ class Naive_Bayes:
         smoothing_factor = 1  # Additive smoothing to handle unseen words
         p_wspam = {word: np.log((count + smoothing_factor) / (W_spam + smoothing_factor * len(wspam))) for word, count in wspam.items()} #log P(x/y)
         p_wham = {word: np.log((count + smoothing_factor) / (W_ham + smoothing_factor * len(wham))) for word, count in wham.items()} # log P(x/~y)
-        return p_spam,p_ham,p_wspam,p_wham
+        
+                #P(y)   #P(~y)  #P(x/y)     #P(x/~y)  
+        return  p_spam, p_ham,  p_wspam,    p_wham
     
 
-    def prediction(p_spam,p_ham,p_wspam,p_wham):
-        
+    def prediction(p_spam,p_ham,p_wspam,p_wham,testing_data):
+        for words,label in testing_data:
+            ham = p_ham
+            spam = p_spam
+            for word in words:
+                if word in p_wspam:
+                    spam += p_wspam[word]
+                elif word in p_wham:
+                    ham += p_wham[word]
+            if ham >spam:
+                label = 0
+            else :
+                label = 1
         return

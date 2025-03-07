@@ -9,7 +9,8 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 class DataLoader:
-    def __init__(self):
+    def __init__(self,file_path):
+        self.file_path = file_path
         # Define method before using in class
         self.stemmer = PorterStemmer()
         self.stop_words = set(stopwords.words('english'))
@@ -26,9 +27,9 @@ class DataLoader:
         # Join words again to produce sentence
         return ' '.join(words)
 
-    def load_data(self, file_path):
+    def load_data(self):
         data_set = set() # Make unordered set that contain msg and label
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(self.file_path, 'r', encoding='utf-8') as file:
             for line in file:
                 # Strip leading/trailling whitespace
                 # Split only on the first space to separate label
