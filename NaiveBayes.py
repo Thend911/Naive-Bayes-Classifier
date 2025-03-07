@@ -39,8 +39,9 @@ class Naive_Bayes:
         return  p_spam, p_ham,  p_wspam,    p_wham
     
 
-    def prediction(p_spam,p_ham,p_wspam,p_wham,testing_data):
-        for words,label in testing_data:
+    def prediction(p_spam, p_ham, p_wspam, p_wham, testing_data):
+        updated_testing_data = set()
+        for words, _ in testing_data:
             ham = p_ham
             spam = p_spam
             for word in words:
@@ -48,8 +49,9 @@ class Naive_Bayes:
                     spam += p_wspam[word]
                 elif word in p_wham:
                     ham += p_wham[word]
-            if ham >spam:
+            if ham > spam:
                 label = 0
-            else :
+            else:
                 label = 1
-        return
+            updated_testing_data.add((words, label))
+        return updated_testing_data  # return data after prediction
