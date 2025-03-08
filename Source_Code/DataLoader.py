@@ -25,7 +25,7 @@ class DataLoader:
         # Apply stemming and remove stopwords
         words = [self.stemmer.stem(word) for word in words if word not in self.stop_words]
         # Join words again to produce sentence
-        return ' '.join(words)
+        return words
 
     def load_data(self):
         X,Y = [],[] # Make list that contain msg and label

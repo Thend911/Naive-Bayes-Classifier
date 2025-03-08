@@ -15,11 +15,6 @@ p_y, p_ny, p_xy, p_xny=nb.train(train_text, train_label)
 upd_train_text,upd_train_label=nb.prediction(p_y, p_ny, p_xy, p_xny,train_text)
 upd_test_text,upd_test_label=nb.prediction(p_y, p_ny, p_xy, p_xny,test_text)
 
-#TEST AREA######
-#########################
-#print(p_y, p_ny)
-#########################
-#(test_label,"\n",upd_test_label)
 em = EvaluationMetrics()
 train_tp,   train_tn,   train_fp,   train_fn,   train_accuracy, train_f1    =em.compute_metrics(train_label,upd_train_label)
 test_tp,    test_tn,    test_fp,    test_fn,    test_accuracy,  test_f1     =em.compute_metrics(test_label,upd_test_label)

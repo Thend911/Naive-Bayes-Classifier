@@ -17,21 +17,20 @@ class Naive_Bayes:
         # Scan for label and count word in data
         data=list(zip(train_x,train_y))
         for words,label in data:
-            token = words.split()
             if label==1:
                 spam+=1
-                for word in token:
+                for word in words:
                     wspam[word]+=1
                     W_spam+=1
             else:
                 ham+=1
-                for word in token:
+                for word in words:
                     wham[word]+=1
                     W_ham+=1
             total+=1
 
         # Laplace smoothing to avoid log(0), because sometimes the testing data may have word that training does not have, smoothing to avoid 0 probability 
-        smoothing_factor = 0.5  # Additive smoothing to handle unseen words
+        smoothing_factor = 1  # Additive smoothing to handle unseen words
 
         # P(y/x) in which y is spam and ~y is ham, x is text
         p_spam =np.log((spam+smoothing_factor)/(total+2*smoothing_factor)) # log P(y)
@@ -42,7 +41,7 @@ class Naive_Bayes:
         total_unique_words = len(set(wspam.keys()).union(set(wham.keys())))
         p_wspam = {word: np.log((count + smoothing_factor) / (W_spam + smoothing_factor * total_unique_words)) for word, count in wspam.items()} #log P(x/y)
         p_wham = {word: np.log((count + smoothing_factor) / (W_ham + smoothing_factor * total_unique_words)) for word, count in wham.items()} # log P(x/~y)
-        
+
                 #P(y)   #P(~y)  #P(x/y)     #P(x/~y)  
         return  p_spam, p_ham,  p_wspam,    p_wham
     

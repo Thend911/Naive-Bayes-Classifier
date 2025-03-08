@@ -6,7 +6,7 @@ class EvaluationMetrics:
         #    P(y)/\ P(nx|y)=1-P(x|y)    #False Neg    
         #       ~
         #   P(ny)\/ P(x|ny)             #False Pos
-        #         \ P(nx|ny)=1-P(x|ny)  #True Neg
+        #         \ P(nx|ny)=1-P(x|ny)  #True 
         TP=TN=FP=FN=0
         for label_a, label_p in zip(actual_labels, predicted_labels):
             if label_a == 1 and label_p == 1:
