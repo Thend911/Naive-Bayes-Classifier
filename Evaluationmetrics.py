@@ -1,14 +1,25 @@
 import numpy as np
 
 class EvaluationMetrics:
-    def compute_metrics(p_y, p_ny, p_xy, p_xny):
-        TP = p_y*p_xy           #         / P(x|y)               #True Pos
-        FN = p_y *(1-p_xy)      #    P(y)/\ P(nx|y)=1-P(x|y)     #False Neg
-                                #       ~
-        FP = p_ny * p_xny       #   P(ny)\/ P(x|ny)              #False Pos
-        TN = p_ny * (1-p_xny)   #         \ P(nx|ny)=1-P(x|ny)   #True Neg
-        accuracy = np.divide(np.add(TP,TN),np.add(TP,TN,FP,FN))
-        precision= np.divide(TP,np.sum(TP,FP))
-        recall = np.divide(TP,np.sum(TP,FN))
-        F1=np.multiply(2,np.divide(np.multiply(precision,recall),np.sum(precision,recall)))
+    def compute_metrics(self,actual_labels,predicted_labels):
+        #         / P(x|y)              #True Pos
+        #    P(y)/\ P(nx|y)=1-P(x|y)    #False Neg    
+        #       ~
+        #   P(ny)\/ P(x|ny)             #False Pos
+        #         \ P(nx|ny)=1-P(x|ny)  #True Neg
+        TP=TN=FP=FN=0
+        for label_a, label_p in zip(actual_labels, predicted_labels):
+            if label_a == 1 and label_p == 1:
+                TP += 1
+            elif label_a == 1 and label_p == 0:
+                FN += 1
+            elif label_a == 0 and label_p == 1:
+                FP += 1
+            elif label_a == 0 and label_p == 0:
+                TN += 1
+        
+        accuracy = (TP + TN)/(TP + TN + FP + FN) if (TP + TN + FP + FN) > 0 else 0 
+        precision = TP/(TP + FP) if (TP + FP) > 0 else 0
+        recall = TP/(TP + FN) if (TP + FN) > 0 else 0
+        F1 = 2 * (precision * recall)/(precision + recall) if (precision + recall) > 0 else 0
         return TP,TN,FP,FN,accuracy,F1

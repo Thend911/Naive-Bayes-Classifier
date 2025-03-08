@@ -5,7 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 
-nltk.download('punkt')
+nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 class DataLoader:
@@ -28,12 +28,12 @@ class DataLoader:
         return ' '.join(words)
 
     def load_data(self):
-        data_set = set() # Make unordered set that contain msg and label
+        X,Y = [],[] # Make list that contain msg and label
         with open(self.file_path, 'r', encoding='utf-8') as file:
             for line in file:
                 # Strip leading/trailling whitespace
                 # Split only on the first space to separate label
-                parts = line.strip().split(' ', 1)  
+                parts = line.strip().split(maxsplit=1) 
                 # If Parts contain label and message (2 part)
                 if len(parts) == 2:
                     # Categorize
@@ -41,12 +41,23 @@ class DataLoader:
                     # Process text
                     processed_text = self.preprocess(text)
                     binary_label = 1 if label.lower() == 'spam' else 0  # Convert label to binary
-                    data_set.add((processed_text, binary_label))
-        return data_set
-    def split_data(self, data):
-        train_ratio=0.8
-        random.shuffle(data)  # Shuffle dataset
+                    X.append(processed_text)
+                    Y.append(binary_label)
+        return X,Y
+    def split_data(self, x, y):
+        train_ratio = 0.8
+
+        # Zip x and y together, convert to list, and shuffle
+        data = list(zip(x, y))
+        random.shuffle(data)
+
+        # Split
         split_idx = int(len(data) * train_ratio)
-        train_data = data[:split_idx]  # First 80%
-        test_data = data[split_idx:]   # Remaining 20%
-        return train_data, test_data
+        train_data = data[:split_idx]
+        test_data = data[split_idx:]
+
+        # Unzip into separate lists
+        X_train, Y_train = zip(*train_data)
+        X_test, Y_test = zip(*test_data)
+
+        return list(X_train), list(Y_train), list(X_test), list(Y_test)

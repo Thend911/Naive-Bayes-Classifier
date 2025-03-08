@@ -1,0 +1,24 @@
+2025-03-07 17:46:29,740 - INFO - Number of training samples: 4459
+2025-03-07 17:46:29,740 - INFO - Number of testing samples: 1115
+2025-03-07 17:46:29,740 - INFO - Training Accuracy: 0.8672348060103162
+2025-03-07 17:46:29,740 - INFO - Testing Accuracy: 0.8556053811659193
+2025-03-07 17:46:29,741 - INFO - Training F1 Score: 0.003367003367003367
+2025-03-07 17:46:29,741 - INFO - Testing F1 Score: 0
+2025-03-07 17:46:29,741 - INFO - Training Confusion Matrix (TP, FN, FP, TN): 1, 586, 6, 3866
+2025-03-07 17:46:29,741 - INFO - Testing Confusion Matrix (TP, FN, FP, TN): 0, 160, 1, 954
+2025-03-07 17:46:31,068 - INFO - Number of training samples: 4459
+2025-03-07 17:46:31,069 - INFO - Number of testing samples: 1115
+2025-03-07 17:46:31,069 - INFO - Training Accuracy: 0.869477461314196
+2025-03-07 17:46:31,069 - INFO - Testing Accuracy: 0.8493273542600897
+2025-03-07 17:46:31,069 - INFO - Training F1 Score: 0.003424657534246575
+2025-03-07 17:46:31,069 - INFO - Testing F1 Score: 0
+2025-03-07 17:46:31,069 - INFO - Training Confusion Matrix (TP, FN, FP, TN): 1, 578, 4, 3876
+2025-03-07 17:46:31,069 - INFO - Testing Confusion Matrix (TP, FN, FP, TN): 0, 168, 0, 947
+2025-03-07 17:47:10,901 - INFO - Number of training samples: 4459
+2025-03-07 17:47:10,901 - INFO - Number of testing samples: 1115
+2025-03-07 17:47:10,902 - INFO - Training Accuracy: 0.8667862749495403
+2025-03-07 17:47:10,902 - INFO - Testing Accuracy: 0.8609865470852018
+2025-03-07 17:47:10,902 - INFO - Training F1 Score: 0.003355704697986577
+2025-03-07 17:47:10,902 - INFO - Testing F1 Score: 0
+2025-03-07 17:47:10,902 - INFO - Training Confusion Matrix (TP, FN, FP, TN): 1, 591, 3, 3864
+2025-03-07 17:47:10,902 - INFO - Testing Confusion Matrix (TP, FN, FP, TN): 0, 155, 0, 960
